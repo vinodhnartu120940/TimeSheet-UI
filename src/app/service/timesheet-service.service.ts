@@ -15,9 +15,13 @@ export class TimesheetServiceService {
     return this.http.post(this.projectUrl, this.projects)
   }
 
-  //get task details
-  getTask() {
-    return this.http.get(this.projectUrl)
-  }
+  // //get task details
+  // getTask() {
+  //   return this.http.get(this.projectUrl)
+  // }
 
+  //get tasks 
+  getTask(empId: any) {
+    return this.http.get(`${this.projectUrl}/` + empId)
+  }
 }
