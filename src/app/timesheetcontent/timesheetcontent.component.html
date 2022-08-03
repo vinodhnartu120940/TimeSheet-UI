@@ -8,32 +8,68 @@
             <div class="col">
               <div class="form-wrapper">
                 <div class="box_style">
-                  <div class="col-md-4 timecard" style="background-color: #08d3d3">
+                  <div
+                    class="col-md-4 timecard"
+                    style="background-color: #08d3d3"
+                  >
                     <p class="text-center pt-2 total_hours">
                       Total Hours Worked
                     </p>
-                    <h6 class="text-center" style="color: white;">{{x}}Hrs</h6>
+                    <h6 class="text-center" style="color: white">{{ x }}Hrs</h6>
                     <!-- <input type="text" formControlName="totalHours"> -->
+                  </div>
+                  <div *ngIf="submitAlert" class="col-md-7 me-auto mt-3">
+                    <div
+                      class="alert alert-success alert-dismissible fade show"
+                      role="alert"
+                    >
+                      <strong>Your task has been submitted successfully.</strong> 
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                      ></button>
+                    </div>
                   </div>
                   <div class="col-md-4 timecard me-auto">
                     <p class="text-center pt-2 total_hours">
                       Date
 
-                      <input type="date" class="form-control" id="datapicker" name="date" name="startDate"
-                        formControlName="date" style="padding-left: 35px;" required />
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="datapicker"
+                        name="date"
+                        name="startDate"
+                        formControlName="date"
+                        style="padding-left: 35px"
+                        required
+                      />
                     </p>
                   </div>
                 </div>
                 <div class="empdetails">
                   <div class="mb-2">
                     <label class="form-label">Employee ID :</label>
-                    <input type="number" class="form-control emp_input" id="exampleInputEmail1"
-                      aria-describedby="emailHelp" formControlName="empId" required />
+                    <input
+                      type="number"
+                      class="form-control emp_input"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      formControlName="empId"
+                      required
+                    />
                   </div>
                   <div class="mb-2">
                     <label class="form-label">Employee Name :</label>
-                    <input type="text" class="form-control emp_input" id="exampleInputPassword1"
-                      formControlName="empName" required />
+                    <input
+                      type="text"
+                      class="form-control emp_input"
+                      id="exampleInputPassword1"
+                      formControlName="empName"
+                      required
+                    />
                   </div>
                   <!-- <div class="mb-2">
                   <label class="form-label">Date</label>
@@ -62,17 +98,23 @@
               <div class="col-md-10">
                 <div class="row">
                   <div class="col-md-3 nopadding me-1">
-                    <div class="dropdown days rounded d-flex align-items-center">
+                    <div
+                      class="dropdown days rounded d-flex align-items-center"
+                    >
                       <p style="color: #7b7b7b">Project Name</p>
                     </div>
                   </div>
                   <div class="col-md-3 nopadding me-1">
-                    <div class="dropdown days rounded d-flex align-items-center">
+                    <div
+                      class="dropdown days rounded d-flex align-items-center"
+                    >
                       <p style="color: #7b7b7b">Activity</p>
                     </div>
                   </div>
                   <div class="col-md-4 nopadding me-1">
-                    <div class="dropdown days d-flex align-items-center rounded">
+                    <div
+                      class="dropdown days d-flex align-items-center rounded"
+                    >
                       <p style="color: #7b7b7b">Task</p>
                     </div>
                   </div>
@@ -99,13 +141,23 @@
           <!-- inputfields data -->
 
           <div class="me-5 ms-5 mt-2" formArrayName="itemRows">
-            <div class="row mt-2" *ngFor="let data of itemRows.controls; let i = index" [formGroupName]="i">
+            <div
+              class="row mt-2"
+              *ngFor="let data of itemRows.controls; let i = index"
+              [formGroupName]="i"
+            >
               <div class="col-md-10">
                 <div class="row">
                   <div class="col-md-3 nopadding me-1">
                     <!-- <div class=" dropdown"> -->
-                    <select class="form-select" aria-label="Default select example" name="activity"
-                      formControlName="projectName" required [disabled]="false">
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      name="activity"
+                      formControlName="projectName"
+                      required
+                      [disabled]="false"
+                    >
                       <option value="Persona Nutrition">
                         Persona Nutrition
                       </option>
@@ -123,8 +175,13 @@
                     </select>
                   </div>
                   <div class="col-md-3 nopadding me-1">
-                    <select class="form-select" aria-label="Default select example" name="activity"
-                      formControlName="activity" required>
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      name="activity"
+                      formControlName="activity"
+                      required
+                    >
                       <option value="Unit Testing">Unit Testing</option>
                       <option value="Acceptance Testing">
                         Acceptance Testing
@@ -147,8 +204,15 @@
                     </select>
                   </div>
                   <div class="col-md-4 nopadding me-1">
-                    <input type="textarea" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                      name="task" formControlName="task" required />
+                    <input
+                      type="textarea"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      name="task"
+                      formControlName="task"
+                      required
+                    />
                     <!-- <input type="text"> -->
                     <!-- <textarea class="form-control"></textarea> -->
                   </div>
@@ -163,50 +227,91 @@
                   
                   </div> -->
                   <div class="col-md-1 nopadding me-1">
-                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                      name="wed" formControlName="hours" required (keyup)="inputValues(i)" />
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      name="wed"
+                      formControlName="hours"
+                      required
+                      (keyup)="inputValues(i)"
+                    />
                   </div>
                 </div>
               </div>
               <div class="col-md-1 d-flex">
-                <button class="btn btn-primary add_style" (click)="addForm();disabledInput(i)" (click)="isDisabled=true"
-                  type="button" [disabled]="taskData.invalid">
+                <button
+                  class="btn btn-primary add_style"
+                  (click)="addForm(); disabledInput(i)"
+                  (click)="isDisabled = true"
+                  type="button"
+                  [disabled]="taskData.invalid"
+                >
                   ADD
                 </button>
 
-                <button class="btn btn-danger ms-2 delete_btn" (click)="removeForm(i)">
+                <button
+                  class="btn btn-danger ms-2 delete_btn"
+                  (click)="removeForm(i)"
+                >
                   DELETE
                 </button>
               </div>
             </div>
             <div style="text-align: center; margin-top: 50px">
-              <button class="btn btn-primary submit_btn" type="submit">SUBMIT</button>
+              <button
+                class="btn btn-primary submit_btn"
+                type="submit"
+                (blur)="removeSubmitAlert()"
+              >
+                SUBMIT
+              </button>
             </div>
           </div>
         </form>
+
+        <hr />
+        <div class="d-flex">
+          <label style="margin: 45px 45px 45px 60px">View Task :</label>
+          <input
+            type="date"
+            class="form-control select_date"
+            id="exampleInputPassword1"
+            #SelectedDate
+          />
+          <button
+            class="btn btn-primary submit_btn"
+            type="view"
+            (click)="getTasts(SelectedDate)"
+            style="margin: 40px 40px 40px 0px"
+          >
+            View
+          </button>
+        </div>
+
         <div class="table_style">
-          <table class="table ">
+          <table class="table" [hidden]="taskView">
             <thead>
               <tr>
-                <th scope="col">EmployeeID</th>
-                <th scope="col">EmployeeName</th>
+                <!-- <th scope="col">EmployeeID</th>
+                <th scope="col">EmployeeName</th> -->
                 <th scope="col">ProjectName</th>
                 <th scope="col">Activity</th>
                 <th scope="col">Task</th>
                 <th scope="col">Date</th>
                 <th scope="col">Hours</th>
-
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let value of project">
-                <th>{{value.employeeID}}</th>
-                <td>{{value.employeeName}}</td>
-                <td>{{value.projectName}}</td>
-                <td>{{value.activity}}</td>
-                <td>{{value.task}}</td>
-                <td>{{value.date}}</td>
-                <td>{{value.workHours}}</td>
+                <!-- <th>{{ value.employeeID }}</th>
+                <td>{{ value.employeeName }}</td> -->
+                <td>{{ value.projectName }}</td>
+                <td>{{ value.activity }}</td>
+                <td>{{ value.task }}</td>
+                <td>{{ value.date }}</td>
+                <td>{{ value.workHours }}</td>
               </tr>
               <!-- <tr>
               <th scope="row">2</th>

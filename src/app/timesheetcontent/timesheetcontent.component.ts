@@ -16,6 +16,7 @@ export class TimesheetcontentComponent implements OnInit {
   startDate: any;
   x: any = 0;
   isDisabled = false;
+  taskView:boolean=true;
 
 
 
@@ -28,12 +29,12 @@ export class TimesheetcontentComponent implements OnInit {
     this.taskData = this.fb.group({
       //create a itemrows control in formgroup
       date: ['00-00-0000'],
-      empId: ['120940'],
-      empName: ["vinodh"],
+      empId: ['120941'],
+      empName: ["Mahesh"],
 
       itemRows: this.fb.array([this.initItemRow()]),
     });
-    this.getTasts();
+    // this.getTasts();
 
 
 
@@ -77,11 +78,18 @@ export class TimesheetcontentComponent implements OnInit {
 
     }
   }
-  getTasts() {
-    this.service.getTask(this.taskData.value['empId']).subscribe(data => {
+  getTasts(SelectedDate:any) {
+    //debugger
+    this.taskView=false;
+    this.service.getTask(this.taskData.value['empId'],SelectedDate.value).subscribe(data => {
       this.project = data;
     })
   }
+  //removeSubmitAlert
+  removeSubmitAlert(){
+    this.submitAlert=false;
+  }
+  submitAlert: boolean = false;
   saveTask() {
     let projectData: any = {
       employeeID: this.taskData.value['empId'],
@@ -96,7 +104,8 @@ export class TimesheetcontentComponent implements OnInit {
     this.service.projects = projectData;
     this.service.saveProject().subscribe(res => {
       console.log("the task is succesfully created");
-      this.getTasts();
+      this.submitAlert= true;
+      // this.getTasts();
     })
     console.log(this.taskData.value)
 
@@ -140,6 +149,12 @@ export class TimesheetcontentComponent implements OnInit {
     // let y = this.taskData.value["itemRows"][id].hours + x;
 
   }
+
+  // viewData(){
+  //   this.service.getTask(this.taskData.value['empId']).subscribe(data => {
+  //     this.project = data;
+  //   })
+  // }
 
 
 }

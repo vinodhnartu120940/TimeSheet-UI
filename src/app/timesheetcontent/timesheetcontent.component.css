@@ -12,6 +12,11 @@
   margin: 30px;
   border-radius: 3px;
 }
+.select_date {
+  width: 183px;
+  margin: 40px 13px 0px -36px;
+  height: 35px;
+}
 
 .empdetails {
   width: 500px;
@@ -28,7 +33,6 @@
   opacity: 1;
   font-family: sans-serif;
   font-weight: bold;
-
 }
 
 label {
@@ -41,7 +45,6 @@ input::placeholder {
   /* height: 30px; */
   font-family: monospace;
   font-size: large;
-
 }
 
 .emp_input {
@@ -51,7 +54,7 @@ input::placeholder {
 }
 
 .table_style {
-  margin: 50px 50px 20px 50px;
+  margin: 6px 50px 20px 50px;
 }
 
 .box_style {
@@ -76,15 +79,14 @@ input::placeholder {
 }
 
 .add_style {
-  background-color: #339FFF;
+  background-color: #339fff;
   font-family: sans-serif;
   font-size: small;
   font-weight: 600;
-
 }
 
 .delete_btn {
-  background-color: #FA5D42;
+  background-color: #fa5d42;
   font-family: sans-serif;
   font-size: small;
   font-weight: 600;

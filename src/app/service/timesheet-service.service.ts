@@ -21,7 +21,8 @@ export class TimesheetServiceService {
   // }
 
   //get tasks 
-  getTask(empId: any) {
-    return this.http.get(`${this.projectUrl}/` + empId)
+  getTask(empId: any,SelectedDate:any) {
+    //debugger;
+    return this.http.get(`${this.projectUrl}/` + empId+"/"+SelectedDate)
   }
 }
