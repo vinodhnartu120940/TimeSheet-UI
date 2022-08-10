@@ -1,5 +1,7 @@
+import { identifierName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+
 import { TimesheetServiceService } from '../service/timesheet-service.service';
 
 @Component({
@@ -16,34 +18,22 @@ export class TimesheetcontentComponent implements OnInit {
   startDate: any;
   x: any = 0;
   isDisabled = false;
-  taskView:boolean=true;
-
-
-
-
-
-
+  taskView: boolean = true;
 
   constructor(public fb: FormBuilder, public service: TimesheetServiceService) {
-
     this.taskData = this.fb.group({
       //create a itemrows control in formgroup
       date: ['00-00-0000'],
       empId: ['120941'],
-      empName: ["Mahesh"],
+      empName: ['Mahesh'],
 
       itemRows: this.fb.array([this.initItemRow()]),
     });
     // this.getTasts();
-
-
-
   }
   //save Project details
 
-
-
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   get itemRows() {
     return this.taskData.get('itemRows') as FormArray;
   }
@@ -54,64 +44,67 @@ export class TimesheetcontentComponent implements OnInit {
       projectName: [''],
       activity: [''],
       task: [''],
-      hours: ['']
-
+      hours: [''],
     });
   }
   addForm() {
-    debugger;
+    // debugger;
 
     this.itemRows.push(this.initItemRow());
-
-
   }
   disabledInput(i: number) {
-    console.log(i)
+    console.log(i);
     this.isDisabled = true;
   }
 
   removeForm(i: number) {
-
     if (this.itemRows.length > 1) {
       this.inputValues1(i);
       this.itemRows.removeAt(i);
-
     }
   }
-  getTasts(SelectedDate:any) {
+  getTasts(SelectedDate: any) {
     //debugger
-    this.taskView=false;
-    this.service.getTask(this.taskData.value['empId'],SelectedDate.value).subscribe(data => {
-      this.project = data;
-    })
+    this.taskView = false;
+    this.service
+      .getTask(this.taskData.value['empId'], SelectedDate.value)
+      .subscribe((data) => {
+        this.project = data;
+      });
   }
   //removeSubmitAlert
-  removeSubmitAlert(){
-    this.submitAlert=false;
+  removeSubmitAlert() {
+    this.submitAlert = false;
   }
   submitAlert: boolean = false;
   saveTask() {
-    let projectData: any = {
-      employeeID: this.taskData.value['empId'],
-      employeeName: this.taskData.value['empName'],
-      date: this.taskData.value['date'],
-      projectName: this.taskData.value['itemRows'][0].projectName,
-      activity: this.taskData.value['itemRows'][0].activity,
-      task: this.taskData.value['itemRows'][0].task,
-      workHours: this.taskData.value['itemRows'][0].hours,
+    var Data: any = [];
+    for (let i = 0; i <= this.Empid; i++) {
+      debugger;
+
+      var projectData: any = {
+        employeeID: this.taskData.value['empId'],
+        employeeName: this.taskData.value['empName'],
+        date: this.taskData.value['date'],
+        projectName: this.taskData.value['itemRows'][i].projectName,
+        activity: this.taskData.value['itemRows'][i].activity,
+        task: this.taskData.value['itemRows'][i].task,
+        workHours: this.taskData.value['itemRows'][i].hours,
+      };
+      Data.push(projectData);
+
+      console.log(Data);
     }
 
-    this.service.projects = projectData;
-    this.service.saveProject().subscribe(res => {
-      console.log("the task is succesfully created");
-      this.submitAlert= true;
+    this.service.projects = Data;
+    this.service.saveProject().subscribe((res) => {
+      console.log('the task is succesfully created');
+      this.submitAlert = true;
       // this.getTasts();
-    })
-    console.log(this.taskData.value)
-
+    });
+    console.log(this.taskData.value);
 
     // console.log(this.service.projects)
-
 
     // console.log(this.itemRows.length)
     // console.log('time difference' +)
@@ -121,33 +114,29 @@ export class TimesheetcontentComponent implements OnInit {
   disableButton() {
     let value = true;
   }
-
+  Empid: any;
   inputValues(id: any) {
-    debugger;
+    this.Empid = id;
+
     for (let i = id; i <= id; i++) {
-
-      this.x = this.x + this.taskData.value["itemRows"][i].hours;
-
+      this.x = this.x + this.taskData.value['itemRows'][i].hours;
     }
-    console.log(this.x)
+    console.log(this.x);
 
     // let y = this.taskData.value["itemRows"][id].hours + x;
-
   }
   inputValues1(id: any) {
-
     let y = this.x;
     // for (let i = id; i <= id; i++) {
 
     //   y = y - this.taskData.value["itemRows"][i].hours;
 
     // }
-    this.x = y - this.taskData.value["itemRows"][id].hours;
+    this.x = y - this.taskData.value['itemRows'][id].hours;
 
-    console.log(this.x)
+    console.log(this.x);
 
     // let y = this.taskData.value["itemRows"][id].hours + x;
-
   }
 
   // viewData(){
@@ -155,6 +144,4 @@ export class TimesheetcontentComponent implements OnInit {
   //     this.project = data;
   //   })
   // }
-
-
 }
