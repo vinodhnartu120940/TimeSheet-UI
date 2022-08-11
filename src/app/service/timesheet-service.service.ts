@@ -7,7 +7,7 @@ import { Timesheetmodels } from "../models/timesheetmodels"
 export class TimesheetServiceService {
 
   constructor(public http: HttpClient) { }
-  projectUrl: string = "https://localhost:7124/api/TimeSheets";
+  projectUrl: string = "http://localhost:7124/api/TimeSheets";
   projects: Timesheetmodels[] = [];
 
 

@@ -2,6 +2,7 @@ import { identifierName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
+
 import { TimesheetServiceService } from '../service/timesheet-service.service';
 
 @Component({
@@ -78,6 +79,8 @@ export class TimesheetcontentComponent implements OnInit {
   }
   submitAlert: boolean = false;
   saveTask() {
+   
+
     var Data: any = [];
     for (let i = 0; i <= this.Empid; i++) {
       debugger;
@@ -95,6 +98,16 @@ export class TimesheetcontentComponent implements OnInit {
 
       console.log(Data);
     }
+    this.taskData = this.fb.group({
+      //create a itemrows control in formgroup
+      date: ['00-00-0000'],
+      // empId: ['120941'],
+      // empName: ['Mahesh'],
+
+      itemRows: this.fb.array([this.initItemRow()]),
+    });
+    this.x="";
+  
 
     this.service.projects = Data;
     this.service.saveProject().subscribe((res) => {
