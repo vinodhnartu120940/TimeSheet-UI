@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 import { TimesheetServiceService } from '../service/timesheet-service.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-timesheetcontent',
@@ -11,16 +12,23 @@ import { TimesheetServiceService } from '../service/timesheet-service.service';
 })
 export class TimesheetcontentComponent implements OnInit {
   taskData: FormGroup;
+  datePipeString:any;
 
   //get task in database
   project: any;
+  date: any;
 
   startDate: any;
   x: any = 0;
   isDisabled = false;
   taskView: boolean = true;
 
-  constructor(public fb: FormBuilder, public service: TimesheetServiceService) {
+  constructor(
+    public fb: FormBuilder,
+    public service: TimesheetServiceService,
+    private datePipe: DatePipe
+  ) {
+    
     this.taskData = this.fb.group({
       //create a itemrows control in formgroup
       date: ['00-00-0000'],
@@ -30,6 +38,7 @@ export class TimesheetcontentComponent implements OnInit {
       itemRows: this.fb.array([this.initItemRow()]),
     });
     // this.getTasts();
+    this.getDate();
   }
   //save Project details
 
@@ -38,6 +47,10 @@ export class TimesheetcontentComponent implements OnInit {
     return this.taskData.get('itemRows') as FormArray;
   }
   // hurs = this.taskData.value['itemRows'][0].startTime;
+  clearForm(){
+    this.itemRows.reset();
+    this.x = 0;
+  }
 
   initItemRow() {
     return this.fb.group({
@@ -63,11 +76,11 @@ export class TimesheetcontentComponent implements OnInit {
       this.itemRows.removeAt(i);
     }
   }
-  getTasts(SelectedDate: any) {
-    //debugger
+  getTasks(SelectedDate: any) {
+    debugger;    
     this.taskView = false;
     this.service
-      .getTask(this.taskData.value['empId'], SelectedDate.value)
+      .getTask(this.taskData.value['empId'], SelectedDate)
       .subscribe((data) => {
         this.project = data;
       });
@@ -99,10 +112,24 @@ export class TimesheetcontentComponent implements OnInit {
     this.service.projects = Data;
     this.service.saveProject().subscribe((res) => {
       console.log('the task is succesfully created');
+      this.getDate();
       this.submitAlert = true;
-      // this.getTasts();
+      this.taskData.reset();
+      //this.itemRows.reset();
+      this.taskData = this.fb.group({
+        //create a itemrows control in formgroup
+        date: ['00-00-0000'],
+        empId: ['120941'],
+        empName: ['Mahesh'],
+  
+        itemRows: this.fb.array([this.initItemRow()]),
+      });
+      this.x = 0;
+      this.startDate.clearForm;  
+      this.date.clearForm;
+      //this.getTasks();
     });
-    console.log(this.taskData.value);
+    console.log(this.taskData.value);    
 
     // console.log(this.service.projects)
 
@@ -144,4 +171,13 @@ export class TimesheetcontentComponent implements OnInit {
   //     this.project = data;
   //   })
   // }
+
+  getDate() {
+    //debugger;
+    this.service.getDate(this.taskData.value['empId']).subscribe((data) => {
+      // console.log(data);
+       this.date = data;
+    }
+    );
+  }
 }

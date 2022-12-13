@@ -23,7 +23,9 @@
                       class="alert alert-success alert-dismissible fade show"
                       role="alert"
                     >
-                      <strong>Your task has been submitted successfully.</strong> 
+                      <strong
+                        >Your task has been submitted successfully.</strong
+                      >
                       <button
                         type="button"
                         class="btn-close"
@@ -263,7 +265,7 @@
               <button
                 class="btn btn-primary submit_btn"
                 type="submit"
-                (blur)="removeSubmitAlert()"
+                (blur)="removeSubmitAlert(); getDate()"
               >
                 SUBMIT
               </button>
@@ -271,8 +273,35 @@
           </div>
         </form>
 
+        <!-- <hr /> -->
+        <div class="ms-5">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">DATE</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let currentdate of date">
+                <td>
+                  <input
+                    ngModel="{{ currentdate | date: 'dd-MM-YYYY' }}"
+                    disabled="true"
+                    #SelectedDate1
+                    
+                  />
+                </td>
+                <td>
+                  <button class="btn btn-primary" (click)="getTasks(currentdate)">view</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <hr />
-        <div class="d-flex">
+        <!-- <div class="d-flex">
           <label style="margin: 45px 45px 45px 60px">View Task :</label>
           <input
             type="date"
@@ -288,7 +317,7 @@
           >
             View
           </button>
-        </div>
+        </div> -->
 
         <div class="table_style">
           <table class="table" [hidden]="taskView">
