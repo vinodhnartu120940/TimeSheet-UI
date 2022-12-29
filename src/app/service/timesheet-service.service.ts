@@ -11,6 +11,7 @@ export class TimesheetServiceService {
   projects: Timesheetmodels[] = [];
 
   saveProject() {
+
     return this.http.post(this.projectUrl, this.projects);
   }
 
@@ -21,7 +22,7 @@ export class TimesheetServiceService {
 
   //get tasks
   getTask(empId: any, SelectedDate: any) {
-    debugger;
+
     return this.http.get(`${this.projectUrl}/` + empId + '/' + SelectedDate);
   }
 

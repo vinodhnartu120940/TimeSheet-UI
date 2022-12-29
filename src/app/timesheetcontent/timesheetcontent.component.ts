@@ -77,7 +77,7 @@ export class TimesheetcontentComponent implements OnInit {
     }
   }
   getTasks(SelectedDate: any) {
-    debugger;    
+  
     this.taskView = false;
     this.service
       .getTask(this.taskData.value['empId'], SelectedDate)
@@ -93,7 +93,7 @@ export class TimesheetcontentComponent implements OnInit {
   saveTask() {
     var Data: any = [];
     for (let i = 0; i <= this.Empid; i++) {
-      debugger;
+
 
       var projectData: any = {
         employeeID: this.taskData.value['empId'],
